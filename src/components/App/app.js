@@ -7,6 +7,11 @@ export default class App extends React.Component {
     constructor(){
         super();
         this.state = {
+            sliders : [
+                {name : 'a'},
+                {name : 'b'},
+                {name : 'c'}
+            ],
             a: 0,
             b: 0,
             c: 0
@@ -24,14 +29,16 @@ export default class App extends React.Component {
     }
 
     render(){
+        const that = this;
         return (
             <div>
-                {this.state.a}
-                <Slider update={this.update.bind(this)} ref="a" />
-                {this.state.b}
-                <Slider update={this.update.bind(this)} ref="b" />
-                {this.state.c}
-                <Slider update={this.update.bind(this)} ref="c" />
+                {this.state.sliders.map((slider) => {
+                    return <div>
+                        <Slider ref={slider.name} update={that.update.bind(that)}/>
+                        {that.state[slider.name]}
+                        </div>
+                })}
+                <hr/>
              </div>
         )
     }
