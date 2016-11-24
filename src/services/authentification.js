@@ -7,9 +7,10 @@ class AuthService {
     ];
 
     login(username, password) {
-        //Check the values
-        return hardCodedLogin.reduce(function(a,b) { return a || b; })
+        return this.hardCodedLogin.reduce(function(a,b) {
+            return a || (b.user == username && b.password == password);
+        }, false);
     }
 }
 
-export default new AutService()
+export default new AuthService()

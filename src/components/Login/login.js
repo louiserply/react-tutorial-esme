@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import AuthService from '../../services/authentification';
 
 export default class Login extends React.Component {
 
@@ -17,11 +17,13 @@ export default class Login extends React.Component {
 
      login(e) {
          e.preventDefault();
-         if(auth.login(this.state.user, this.state.password)){
+         if(AuthService.login(this.state.user, this.state.password)){
+             alert('Success !');
              //redirect to protected route (Cf step 4)
              //and store the login token (here without store)
+         } else {
+             alert('Fail !');
          }
-
     }
 
     render() {
