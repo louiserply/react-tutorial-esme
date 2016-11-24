@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthService from '../../services/authentification';
+import { Button, Input } from 'semantic-ui-react'
 
 export default class Login extends React.Component {
 
@@ -27,37 +28,18 @@ export default class Login extends React.Component {
     }
 
     render() {
-        const styles = {
-            inputStyle: {
-                display: "block",
-                margin: 0,
-                width: "100%",
-                fontFamily: "sans-serif",
-                fontSize: "18px",
-                appearance: "none",
-                boxShadow: "none",
-                borderRadius: "none",
-            },
-            red: {
-                backgroundColor: "red"
-            },
-            blue: {
-                backgroundColor: "blue"
-            }
-        }
-
 
         return (
             <form role="form">
                 <div className="form-group">
-                    <input style={styles.inputStyle} type="text" name="user" value={this.state.user}
+                    <Input type="text" name="user" value={this.state.user}
                            placeholder="Username"
                            onChange={this.handleChange.bind(this)}  />
-                    <input style={styles.blue} type="password" name="password" value={this.state.password}
+                    <Input type="password" name="password" value={this.state.password}
                            placeholder="Password"
                            onChange={this.handleChange.bind(this)} />
                 </div>
-                <button type="submit" onClick={this.login.bind(this)}>Submit</button>
+                <Button type="submit" onClick={this.login.bind(this)}>Submit</Button>
             </form>
         );
     }
