@@ -18,13 +18,19 @@ export default class Login extends React.Component {
 
     login(e) {
         e.preventDefault();
-        if (AuthService.login(this.state.user, this.state.password)) {
-            alert('Success !');
-            //redirect to protected route (Cf step 4)
-            //and store the login token (here without store)
-        } else {
-            alert('Fail !');
-        }
+        AuthService.login(this.state.user, this.state.password, (loggedIn) => {
+            if (!loggedIn)
+                return this.setState({ error: true })
+
+            const { location } = this.props
+
+            if (location.state && location.state.nextPathname) {
+                this.props.router.replace(location.state.nextPathname)
+            } else {
+                this.props.router.replace('/')
+            }
+        })
+
     }
 
     render() {
