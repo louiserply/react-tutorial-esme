@@ -27,10 +27,22 @@ export default class Login extends React.Component {
     }
 
     render() {
+        const inputStyle = {
+            display: "block",
+            margin: 0,
+            width: "100%",
+            fontFamily: "sans-serif",
+            fontSize: "18px",
+            appearance: "none",
+            boxShadow: "none",
+            borderRadius: "none",
+            backgroundColor: "blue"
+        }
+
         return (
             <form role="form">
                 <div className="form-group">
-                    <input type="text" name="user" value={this.state.user}
+                    <input style={inputStyle} type="text" name="user" value={this.state.user}
                            placeholder="Username"
                            onChange={this.handleChange.bind(this)} />
                     <input type="password" name="password" value={this.state.password}
