@@ -14,6 +14,7 @@ class AppMenu extends React.Component {
         const {activeItem} = this.state;
 
         let logMenu = null;
+
         if (!this.props.authenticated) {
             logMenu = <Menu.Item
                 name='login'
@@ -28,7 +29,7 @@ class AppMenu extends React.Component {
                         as={Link}
                         to="logout"
                         active={activeItem === 'logout'}
-                     onClick={this.handleItemClick}
+                        onClick={this.props.logout}
                     />
         }
 
@@ -59,5 +60,12 @@ function mapStateToProps(state) {
         authenticated: state.auth.authenticated
     }
 }
+const mapDispatchToProps = dispatch => ({
+    logout : () => {
+        dispatch({
+            type: "SIGN_OUT_USER",
+        })
+    }
+});
 
-export default connect(mapStateToProps)(AppMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(AppMenu);

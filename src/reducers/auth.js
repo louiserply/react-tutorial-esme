@@ -8,6 +8,10 @@ const hardCodedLogin = [
     {
         user: "iwa",
         password: "iwa"
+    },
+    {
+        user: "kermit",
+        password: "kermit"
     }
 ];
 
