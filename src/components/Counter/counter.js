@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Slider extends React.Component {
+export default class Counter extends React.Component {
     render(){
         return (
             <div>

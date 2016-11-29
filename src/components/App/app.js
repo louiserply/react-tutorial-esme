@@ -21,9 +21,6 @@ export default class App extends React.Component {
     update(e){
         this.setState(
             {
-                a: ReactDOM.findDOMNode(this.refs.a.refs.slider).value,
-                b: ReactDOM.findDOMNode(this.refs.b.refs.slider).value,
-                c: ReactDOM.findDOMNode(this.refs.c.refs.slider).value
             }
         )
     }
