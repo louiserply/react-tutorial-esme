@@ -1,8 +1,8 @@
 import React from 'react';
-import AuthService from '../../services/authentification';
 import { Button, Input, Form } from 'semantic-ui-react'
+import {connect} from 'react-redux'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -18,18 +18,7 @@ export default class Login extends React.Component {
 
     login(e) {
         e.preventDefault();
-        AuthService.login(this.state.user, this.state.password, (loggedIn) => {
-            if (!loggedIn)
-                return this.setState({ error: true })
-
-            const { location } = this.props
-
-            if (location.state && location.state.nextPathname) {
-                this.props.router.replace(location.state.nextPathname)
-            } else {
-                this.props.router.replace('/')
-            }
-        })
+        this.props.login(this.state.user, this.state.password);
 
     }
 
@@ -59,3 +48,23 @@ export default class Login extends React.Component {
         );
     }
 }
+
+
+const mapStateToProps = state => ({
+    authenticated: state.auth.authenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+    login : (username, password) => {
+        dispatch({
+            type: "SIGN_IN_USER",
+            username,
+            password
+        })
+    }
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login)

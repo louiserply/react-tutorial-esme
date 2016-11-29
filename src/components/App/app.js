@@ -1,34 +1,20 @@
 import React from 'react';
 import AppMenu from 'components/Menu/menu';
-import { Link } from 'react-router'
-import AuthService from '../../services/authentification';
+import {connect} from 'react-redux'
 
-export default class App extends React.Component {
-
-    constructor(){
-        super();
-        this.state = {
-            loggedIn: AuthService.loggedIn()
-        }
-    }
-
-    updateAuth(loggedIn) {
-        this.setState({
-            loggedIn
-        })
-    }
-
-    componentWillMount() {
-        AuthService.onChange = this.updateAuth.bind(this);
-        AuthService.login()
-    }
-
+class App extends React.Component {
     render(){
         return (
             <div>
                 <AppMenu />
-                {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+                {this.props.children || <p>You are {!this.props.authenticated && 'not'} logged in.</p>}
             </div>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router'
-import AuthService from '../../services/authentification';
+import { connect } from 'react-redux'
 
-export default class AppMenu extends React.Component {
-    state = {}
+class AppMenu extends React.Component {
+    state = {};
 
     handleItemClick = (e, {name}) => {
         this.setState({activeItem: name});
@@ -14,7 +14,7 @@ export default class AppMenu extends React.Component {
         const {activeItem} = this.state;
 
         let logMenu = null;
-        if (!AuthService.loggedIn()) {
+        if (!this.props.authenticated) {
             logMenu = <Menu.Item
                 name='login'
                 as={Link}
@@ -31,6 +31,7 @@ export default class AppMenu extends React.Component {
                      onClick={this.handleItemClick}
                     />
         }
+
         return (
             <Menu>
                 <Menu.Item
@@ -52,3 +53,11 @@ export default class AppMenu extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated
+    }
+}
+
+export default connect(mapStateToProps)(AppMenu);
