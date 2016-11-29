@@ -8,9 +8,9 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import AuthService from '../../services/authentification';
 
+import RequireAuth from 'components/Auth/auth';
 import {createStore} from "redux";
 import {Provider} from "react-redux";
-
 
 const store = createStore();
 
@@ -31,7 +31,6 @@ export default class Root extends React.Component {
                 <Router history={browserHistory}>
                     <Route path="/" component={App}>
                         <IndexRoute component={Home} />
-                        <Route path="home" component={Home} />
                         <Route path="profile" component={Profile} onEnter={this.requireAuth} />
                         <Route path="login" component={Login} />
                         <Route path="logout" component={Logout} />
