@@ -2,11 +2,12 @@
  * Created by DGBT7343 on 29/11/2016.
  */
 
-export default function counter(state, action){
+export default function counter(state = {counter: 0}, action){
+    console.log(action)
     if (action.type == 'INCREMENT'){
-        return state + 1;
+        return {counter: state.counter+1};
     } else if(action.type = 'DECREMENT') {
-        return state - 1;
+        return {counter: state.counter-1};
     } else {
         return state;
     }

@@ -1,42 +1,47 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Slider from 'components/Slider/slider';
+import Counter from 'components/Counter/counter';
+import { connect } from 'react-redux';
 
-export default class App extends React.Component {
+class App extends React.Component {
 
     constructor(){
         super();
-        this.state = {
-            sliders : [
-                {name : 'a'},
-                {name : 'b'},
-                {name : 'c'}
-            ],
-            a: 0,
-            b: 0,
-            c: 0
-        };
-    }
-
-    update(e){
-        this.setState(
-            {
-            }
-        )
     }
 
     render(){
-        const that = this;
+        console.log(this.props);
         return (
             <div>
-                {this.state.sliders.map((slider) => {
-                    return <div>
-                        <Slider ref={slider.name} update={that.update.bind(that)}/>
-                        {that.state[slider.name]}
-                        </div>
-                })}
+                <Counter value={this.props.counter}
+                         onIncrement={this.props.onIncrement}
+                         onDecrement={this.props.onDecrement} >
+
+                </Counter>
                 <hr/>
              </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    counter: state.counter
+})
+
+const mapDispatchToProps = dispatch => ({
+    onDecrement : () => {
+        dispatch({
+            type: "DECREMENT"
+        })
+    },
+    onIncrement : () => {
+        dispatch({
+            type: "INCREMENT"
+        })
+    },
+
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)
