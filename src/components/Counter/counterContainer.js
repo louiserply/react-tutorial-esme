@@ -18,12 +18,12 @@ class ContainerContainer extends React.Component {
     render() {
         let rows = [];
         for (let i=0; i < this.props.nb; i++) {
-            rows.push(<Counter key={i}
-                               value={this.props.counter}
+            console.log(i);
+            rows.push(<Counter key={"counter-"+i} id={i}
+                               value={this.props.counter[i]}
                                onDecrement={this.props.onDecrement}
                                onIncrement={this.props.onIncrement}
             />);
-            rows.push(<hr/>)
         }
         return (
             <div>{rows}</div>
@@ -36,14 +36,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onDecrement : () => {
+    onDecrement : (id) => {
         dispatch({
-            type: "DECREMENT"
+            type: "DECREMENT",
+            id
         })
     },
-    onIncrement : () => {
+    onIncrement : (id) => {
         dispatch({
-            type: "INCREMENT"
+            type: "INCREMENT",
+            id
         })
     }
 });
