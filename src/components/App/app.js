@@ -1,8 +1,8 @@
 import React from 'react';
-import Counter from 'components/Counter/counter';
+import CounterContainer from 'components/Counter/counterContainer';
 import { connect } from 'react-redux';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
     constructor(){
         super();
@@ -12,36 +12,9 @@ class App extends React.Component {
         console.log(this.props);
         return (
             <div>
-                <Counter value={this.props.counter}
-                         onIncrement={this.props.onIncrement}
-                         onDecrement={this.props.onDecrement} >
-
-                </Counter>
-                <hr/>
+                <CounterContainer nb="3">
+                </CounterContainer>
              </div>
         )
     }
 }
-
-const mapStateToProps = state => ({
-    counter: state.counter
-})
-
-const mapDispatchToProps = dispatch => ({
-    onDecrement : () => {
-        dispatch({
-            type: "DECREMENT"
-        })
-    },
-    onIncrement : () => {
-        dispatch({
-            type: "INCREMENT"
-        })
-    },
-
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App)
